@@ -1,0 +1,29 @@
+{
+  "name": "@ai-resume-builder/ui",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shared design tokens (Tailwind preset) used by AI Resume Builder apps.",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./tailwind-preset": {
+      "types": "./dist/tailwind-preset.d.ts",
+      "default": "./dist/tailwind-preset.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf dist"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.13",
+    "typescript": "^5.6.3"
+  }
+}
