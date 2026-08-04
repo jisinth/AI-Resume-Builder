@@ -53,9 +53,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter @ai-resume-builder/api exec prisma generate
-      - run: pnpm --filter @ai-resume-builder/utils test
-      - run: pnpm --filter @ai-resume-builder/api test
-      - run: pnpm --filter @ai-resume-builder/web test
+      - run: pnpm run test
 
   build:
     runs-on: ubuntu-latest
@@ -106,6 +104,8 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @ai-resume-builder/api exec prisma generate
+      - run: pnpm --filter @ai-resume-builder/api^... run build
       - run: pnpm --filter @ai-resume-builder/api exec prisma migrate deploy
       - run: pnpm --filter @ai-resume-builder/api exec prisma db seed
       - run: pnpm --filter @ai-resume-builder/api test:e2e
