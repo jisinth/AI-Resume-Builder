@@ -41,7 +41,6 @@ export function ResumeBuilder({ resume }: { resume: Resume }) {
   const [lastSavedAt, setLastSavedAt] = useState<Date | null>(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const isMountedRef = useRef(false);
 
   const form = useForm<ResumeFormValues>({
     resolver: zodResolver(resumeSchema),
@@ -50,10 +49,6 @@ export function ResumeBuilder({ resume }: { resume: Resume }) {
 
   useEffect(() => {
     const subscription = form.watch((values) => {
-      if (!isMountedRef.current) {
-        isMountedRef.current = true;
-        return;
-      }
       if (debounceRef.current) clearTimeout(debounceRef.current);
       debounceRef.current = setTimeout(() => {
         updateResume.mutate(values as ResumeFormValues, {
