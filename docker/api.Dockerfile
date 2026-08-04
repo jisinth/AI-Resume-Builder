@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM node:20-alpine AS base
+FROM node:26-alpine AS base
 # Prisma's query/schema engine binaries need OpenSSL, which node:20-alpine
 # does not include by default.
 RUN apk add --no-cache openssl
@@ -21,7 +21,7 @@ COPY . .
 RUN pnpm --filter @ai-resume-builder/api exec prisma generate
 RUN pnpm --filter @ai-resume-builder/api... run build
 
-FROM node:20-alpine AS runtime
+FROM node:26-alpine AS runtime
 ENV NODE_ENV=production
 WORKDIR /app
 RUN apk add --no-cache openssl
