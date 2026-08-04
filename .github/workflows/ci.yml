@@ -131,6 +131,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
+      - run: pnpm install --frozen-lockfile
       - run: pnpm --filter @ai-resume-builder/web exec playwright install --with-deps chromium
       - run: pnpm --filter @ai-resume-builder/web test:e2e
         env:
